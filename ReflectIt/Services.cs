@@ -28,10 +28,13 @@ namespace ReflectIt
 
         }
     }
+    public class Customer
+    {
 
+    }
     public class InvoiceService
     {
-        public InvoiceService(IRepository<Employee> repositoru, ILogger logger)
+        public InvoiceService(IRepository<Customer> repositoru, ILogger logger)
         {
 
         }

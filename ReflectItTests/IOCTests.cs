@@ -26,11 +26,25 @@ namespace ReflectItTests
         {
             var ioc = new Container();
             ioc.For<ILogger>().Use<SqlSercerLogger>();
-            ioc.For <IRepository<Employee>>().Use<SqlRepository<Employee>>();
+            ioc.For<IRepository<Employee>>().Use<SqlRepository<Employee>>();
 
             var repository = ioc.Resolve<IRepository<Employee>>();
 
             Assert.AreEqual(typeof(SqlRepository<Employee>), repository.GetType());
+        }
+
+        [TestMethod]
+        public void Can_Resolve_Concrete_Type()
+        {
+            var ioc = new Container();
+            ioc.For<ILogger>().Use<SqlSercerLogger>();
+            //ioc.For<IRepository<Employee>>().Use<SqlRepository<Employee>>();
+            //ioc.For<IRepository<Customer>>().Use<SqlRepository<Customer>>();
+            ioc.For(typeof(IRepository<>)).Use(typeof(SqlRepository<>));
+
+            var service = ioc.Resolve<InvoiceService>();
+
+            Assert.IsNotNull(service);
         }
     }
 }
